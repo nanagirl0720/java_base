@@ -3,6 +3,7 @@ package edu.fx.stream;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 /**
@@ -70,7 +71,34 @@ public class StreamDemo {
         System.out.println("================3.排序===========================");
         arrayList.stream().sorted().forEach(System.out::println);
 //        studentList.stream().sorted().forEach(System.out::println);//这样会报错
+        //类对象排序必须要先制定排序规则
         studentList.stream().sorted( (c1,c2)->Integer.compare(c1.getAge(),c2.getAge())).forEach(System.out::println);
+        System.out.println("================中间操作结束===========================");
+        System.out.println("================结束操作===========================");
+        //返回 是否所有的age都等于25
+        System.out.println(studentList.stream().allMatch(s -> s.getAge() == 25));
+        //返回 是否存在有一个age等于25
+        System.out.println(studentList.stream().anyMatch(s -> s.getAge() == 25));
+        //返回 是不是没找到age等于25的
+        System.out.println(studentList.stream().noneMatch(s -> s.getAge() == 25));
+        //返回 当前流的第一个元素
+        System.out.println(studentList.stream().findFirst());
+        //返回 任意一个对象
+        System.out.println(studentList.stream().findAny());//顺序流
+        System.out.println(studentList.parallelStream().findAny());//并行流
+        //统计流中的个数
+        System.out.println(strings.stream().count());
+        //返回集合中age中最大的年龄
+        System.out.println(studentList.stream().map(s -> s.getAge()).max(Integer::compareTo));
+        System.out.println(studentList.stream().map(s -> s.getAge()).min(Integer::compareTo));
+        //归约---相当于合并
+        List<Integer> integers = Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
+        //求数组中的合计数
+        System.out.println(integers.stream().reduce(0, Integer::sum));
+        //收集
+        //查找年龄大于24的学生，并返回一个list集合
+        System.out.println(studentList.stream().filter(s -> s.getAge() > 24).collect(Collectors.toList()));
+
     }
     private static Stream<Character> fromStingToStream(String s) {
         ArrayList<Character> chList = new ArrayList<>();
