@@ -2,13 +2,15 @@ package edu.fx.reflect;
 
 import edu.fx.stream.Student;
 
+import java.util.Random;
+
 /**
  * @author: Pxn
  * @date: 2019/12/21 13:40
  */
 public class ReflectExample {
 
-    public static void main(String[] args) throws ClassNotFoundException {
+    public static void main(String[] args) throws ClassNotFoundException, IllegalAccessException, InstantiationException {
 
         //获取反射实例
         //方式一：通过对象的getClass方法
@@ -38,5 +40,44 @@ public class ReflectExample {
         System.out.println("理解含义：");
         System.out.println(intsClass==ints1Class);
 
+
+        test1();
+
+
+    }
+
+    private static void test1()  {
+
+        try {
+            int i = new Random().nextInt(3);
+            System.out.println(i);
+            String str="";
+            switch (i){
+                case 0:
+                    str="java.lang.String";
+                    break;
+                case 1:
+                    str="java.util.Date";
+                    break;
+                case 2:
+                    str="edu.fx.reflect.ReflectExample";
+                    break;
+
+            }
+            Object instance = getInstance(str);
+            System.out.println(instance);
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } catch (InstantiationException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private static Object getInstance(String str) throws ClassNotFoundException, InstantiationException, IllegalAccessException {
+        Class aClass1 = Class.forName(str);
+        Object o = aClass1.newInstance();
+        return o;
     }
 }
