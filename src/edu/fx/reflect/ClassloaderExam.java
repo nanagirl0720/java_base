@@ -1,7 +1,6 @@
 package edu.fx.reflect;
 
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
@@ -15,10 +14,6 @@ public class ClassloaderExam {
     public static void main(String[] args) throws IOException {
 
         fileStreamtest();
-        classloaderStreamTest();
-    }
-
-    private static void classloaderStreamTest() throws IOException {
         Properties properties = new Properties();
         ClassLoader classLoader = ClassLoaderTest.class.getClassLoader();
         InputStream resourceAsStream = classLoader.getResourceAsStream("jdbc1.properties");
