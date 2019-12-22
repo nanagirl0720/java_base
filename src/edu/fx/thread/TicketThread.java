@@ -6,15 +6,23 @@ package edu.fx.thread;
  */
 class SeldTicketWindows extends Thread{
     static int ticket=100;
+    //static Object obj=new Object();
     @Override
     public void run() {
         while (true){
-            if (ticket > 0){
-                System.out.println(getName()+" 您的票号是: " + ticket );
-                ticket--;
-            }else{
-                System.out.println("Sorry！今天已经售完了。");
-                break;
+            synchronized(SeldTicketWindows.class){ //同步代码块：由变量（共享数据ticket）决定
+                if (ticket > 0){
+                    try {
+                        Thread.sleep(100);  //线程打印太快了，阻塞一下，让其他线程并行操作
+                        System.out.println(getName()+" 您的票号是: " + ticket );
+                        ticket--;
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }else{
+                    System.out.println("Sorry！今天已经售完了。");
+                    break;
+                }
             }
          }
     }
