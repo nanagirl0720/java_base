@@ -12,7 +12,50 @@ public class FileReaderTest {
         //readFileTest();
         //写文件:FileWriter
         //writeFileTest();
+        long start = System.currentTimeMillis();
+        String files="C:\\Users\\LittleDog\\Desktop\\15-尚硅谷-Java语言高级-缓冲流(字节型)实现非文本文件的复制-超清720P.qsv";
+        String copyFiles="video.qsv";
+        fileStreamCopyTest(files, copyFiles);
+        long end = System.currentTimeMillis();
+        System.out.println(end-start);//6332
+    }
 
+    private static void fileStreamCopyTest(String files, String copyFiles) {
+        //通过节点流处理视频复制
+        File file = new File(files);
+        File copyFile = new File(copyFiles);
+        //创建需要操作的流
+        FileInputStream fileInputStream=null;
+        FileOutputStream fileOutputStream=null;
+        try {
+            fileInputStream = new FileInputStream(file);
+            fileOutputStream = new FileOutputStream(copyFile);
+
+            //复制
+            byte[] tpfz=new byte[200];
+            int date;
+            while (((date=fileInputStream.read(tpfz))!=-1)) {
+                fileOutputStream.write(tpfz, 0, date);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }finally {
+            if (fileInputStream!=null){
+                //关闭流
+                try {
+                    fileInputStream.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+            if (fileOutputStream!=null){
+                try {
+                    fileOutputStream.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
     }
 
     private static void writeFileTest() {
