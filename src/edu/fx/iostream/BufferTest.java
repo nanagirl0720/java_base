@@ -8,9 +8,18 @@ import java.io.*;
  */
 public class BufferTest {
     public static void main(String[] args) {
+        long start = System.currentTimeMillis();
+        String files="C:\\Users\\LittleDog\\Desktop\\15-尚硅谷-Java语言高级-缓冲流(字节型)实现非文本文件的复制-超清720P.qsv";
+        String copyFiles="video.qsv";
+        bufferedTest(files,copyFiles);
+        long end = System.currentTimeMillis();
+        System.out.println(end-start);//4404
+    }
+
+    private static void bufferedTest(String files,String copyFiles) {
         //将本地的图片复制到项目的相对路径下
-        File file = new File("F:\\1pxn\\test\\wx.jpg");
-        File copyFile = new File("wx.jpg");
+        File file = new File(files);
+        File copyFile = new File(copyFiles);
         //创建需要操作的流
         BufferedInputStream bufferedInputStream=null;
         BufferedOutputStream bufferedOutputStream=null;
