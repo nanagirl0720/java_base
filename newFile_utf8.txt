@@ -1,0 +1,15 @@
+##河北宣化门诊收费
+-- 201801月的门诊量 22386
+-- 一个病人一次就诊后，算一个门诊量
+select  count(case when 检查量!=0 then 1 else null end )潜在客户,
+        count(case when 检查量=0 and 非西药量=0 then 1 else null end )纯西药,
+        count(case when 检查量=0 and 非西药量!=0  then 1 else null end )待开发客户
+ from(      
+select distinct first_flag
+      ,sum(case when charge_code not in(2,3,4) then 1 else  0 end) 检查量,
+      sum(case when charge_code in(2,3) then 1 else 0 end) 西药量,
+      sum(case when charge_code in(4) then 1 else 0 end) 非西药量
+FROM t_mz_charge
+where date_format(order_time,'%Y%m')='201801' 
+group by first_flag
+)a
