@@ -16,3 +16,17 @@ class SingleExample{
         return singleExample;
     }
 }
+class LanHanSimple{
+    private LanHanSimple(){}
+    private static LanHanSimple lanHanSimple;
+    public static  LanHanSimple getLanHanSimple(){
+        if (lanHanSimple==null){
+            synchronized(LanHanSimple.class){
+                if (lanHanSimple==null){
+                    lanHanSimple=new LanHanSimple();
+                }
+            }
+        }
+        return lanHanSimple;
+    }
+}
