@@ -8,6 +8,11 @@ import java.io.*;
  */
 public class BufferTest {
     public static void main(String[] args) {
+        //testCopyVideo();
+        bufferedTest("wx.jpg","D:/wx.jpg");
+    }
+
+    private static void testCopyVideo() {
         long start = System.currentTimeMillis();
         String files="C:\\Users\\LittleDog\\Desktop\\15-尚硅谷-Java语言高级-缓冲流(字节型)实现非文本文件的复制-超清720P.qsv";
         String copyFiles="video.qsv";
@@ -16,7 +21,7 @@ public class BufferTest {
         System.out.println(end-start);//4404
     }
 
-    private static void bufferedTest(String files,String copyFiles) {
+    public static void bufferedTest(String files,String copyFiles) {
         //将本地的图片复制到项目的相对路径下
         File file = new File(files);
         File copyFile = new File(copyFiles);
