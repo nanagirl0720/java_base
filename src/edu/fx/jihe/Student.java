@@ -71,4 +71,8 @@ public class Student  implements Comparable{
             throw new RuntimeException("不是该学生类型对象！");
         }
     }
+
+    public void study(){
+        System.out.println("上学！");
+    }
 }
