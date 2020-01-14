@@ -20,7 +20,7 @@ public class ReflectExample {
         //方式二：通过类的静态属性class
         Class<Student> studentClass = Student.class;
         System.out.println(studentClass);
-        //方法三：Class类的forName方法
+        //方法三：Class类的forName方法（常用：此方法体现了反射的动态性）
         Class student1 =Class.forName("edu.fx.stream.Student");
         System.out.println(student1);
         //方法四：
@@ -39,11 +39,7 @@ public class ReflectExample {
         Class ints1Class = ints1.getClass();
         System.out.println("理解含义：");
         System.out.println(intsClass==ints1Class);
-
-
         test1();
-
-
     }
 
     private static void test1()  {
